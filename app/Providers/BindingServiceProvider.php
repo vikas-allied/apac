@@ -16,6 +16,14 @@ class BindingServiceProvider extends ServiceProvider
             'App\Services\AdminUserService\AdminUserService',
             'App\Services\AdminUserService\AdminUserServiceImpl'
         );
+        $this->app->bind(
+            'App\Services\RoleService\RoleService',
+            'App\Services\RoleService\RoleServiceImpl'
+        );
+        $this->app->bind(
+            'App\Services\PermissionService\PermissionService',
+            'App\Services\PermissionService\PermissionServiceImpl'
+        );
 
     }
 

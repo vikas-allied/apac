@@ -7,6 +7,7 @@ use App\Mail\Admin\AdminResetPasswordLink;
 use App\Services\AdminUserService\AdminUserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -130,9 +131,7 @@ class AuthController extends Controller
 
             }
             catch(\Exception $e){
-                \Log::info($e->getMessage());
 
-                \Log::info($e->getTrace());
                 return redirect()->back()->with('error','An error occurred. Try Again!');
 
             }
@@ -163,7 +162,7 @@ class AuthController extends Controller
                 $validator = Validator::make($request->all(), $rules, $messages);
                 if($validator->fails())
                 {
-                    redirect()->back()->withErrors($validator);
+                    return redirect()->back()->withErrors($validator);
                 }
 
                 $admin = $this->adminUserService->getUserByTokenAndEmail($request->token, $request->email);

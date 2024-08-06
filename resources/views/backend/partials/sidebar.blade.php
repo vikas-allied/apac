@@ -22,10 +22,46 @@
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Str::contains(Route::currentRouteName(), 'dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
+                </li>
+
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{ route('admin.roles.index') }}" class="nav-link {{ Str::contains(Route::currentRouteName(), 'roles.index') ? 'active' : '' }}">--}}
+{{--                        <i class="nav-icon bi bi-speedometer"></i>--}}
+{{--                        <p>Roles</p>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+
+                <li class="nav-header text-uppercase">
+                    <p>System Management</p>
+                </li>
+                <li class="nav-item {{ Str::contains(Route::currentRouteName(), [ 'roles', 'users']) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ Str::contains(Route::currentRouteName(), [ 'roles', 'users']) ? 'active' : '' }}">
+                        <i class="nav-icon bi bi-sliders"></i>
+                        <p>
+                            User Management
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" >
+                        <li class="nav-item">
+                            <a href="{{ route('admin.roles.index') }}" class="nav-link {{ Str::contains(Route::currentRouteName(), 'roles') ? 'active' : '' }}">
+                                <i class="bi bi-person-fill-gear"></i>
+                                <p>Role</p>
+                            </a>
+                        </li>
+                        @can('manage_user')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.users.index') }}" class="nav-link {{ Str::contains(Route::currentRouteName(), 'users') ? 'active' : '' }}">
+                                <i class="bi bi-people"></i>
+                                <p>Admin Users</p>
+                            </a>
+                        </li>
+                        @endcan
+                    </ul>
                 </li>
 
             </ul>
